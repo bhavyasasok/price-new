@@ -1,0 +1,165 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+		.btn-outline-dark {
+			color: #212529;
+			background-color: #fff;
+			border-color: #ABCCD8;
+		}
+	  
+		.btn-outline-dark:hover {
+		  color: #212529;
+		  background-color: #66A1B8;
+		  border-color: #66A1B8;
+	  }
+	</style>
+</head>
+<a  class="btn btn-outline-dark" href="{% url 'contents' %}">Continue Shopping</a>
+<!--                               TESCO                          -->
+		<div class = "row">
+		<div class = "col-lg-6 card-group">
+		<div class="box-element" id = "form-wrapper">
+			<h1>Tesco</h1>
+	<div class="cart-row">
+		<div style="flex:2"></div>
+		<div style="flex:2"><strong>Item</strong></div>
+		<div style="flex:1"><strong>Price</strong></div>
+		<div style="flex:1"><strong>Quantity</strong></div>
+		<div style="flex:1"><strong>Total</strong></div>
+	</div>
+
+	{% for item in items %}
+	{%if item.product.tesco_match == -1%}
+	<div class="cart-row">
+		<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+		<div style="flex:2"><p>{{item.product.name}}</p></div>
+		<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
+		<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+		<div style="flex:1"><p>£{{item.get_total}}</p></div>
+	</div>
+	{% else %}
+	<div class="cart-row">
+		<div style="flex:2"><img class="row-image" src="{{item.product.tesco_match_id.imageURL}}"></div>
+		<div style="flex:2"><p>{{item.product.tesco_match_id.name}}</p></div>
+		<div style="flex:1"><p>£{{item.product.tesco_match_id.price|floatformat:2}}</p></div>
+		<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+		<div style="flex:1"><p>£{{item.get_total_tesco}}</p></div>
+	</div>
+	{%endif%}
+	{% endfor %}
+	<h4>Total price: £{{order.get_total_price_tesco}}</h4>
+	</div>
+</div>
+
+<!--                               MORRISONS                         -->
+<div class = "col-lg-6 card-group">
+	<div class="box-element" id = "form-wrapper">
+		<h1>Morrisons</h1>
+<div class="cart-row">
+	<div style="flex:2"></div>
+	<div style="flex:2"><strong>Item</strong></div>
+	<div style="flex:1"><strong>Price</strong></div>
+	<div style="flex:1"><strong>Quantity</strong></div>
+	<div style="flex:1"><strong>Total</strong></div>
+</div>
+
+{% for item in items %}
+{%if item.product.morrisons_match == -1%}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total}}</p></div>
+</div>
+{% else %}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.morrisons_match_id.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.morrisons_match_id.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.morrisons_match_id.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total_morrisons}}</p></div>
+</div>
+{%endif%}
+{% endfor %}
+<h4>Total price: £{{order.get_total_price_morrisons}}</h4>
+</div>
+</div>
+
+<!--                               WAITROSE                          -->
+<div class = "col-lg-6 card-group">
+	<div class="box-element" id = "form-wrapper">
+		<h1>Waitrose</h1>
+<div class="cart-row">
+	<div style="flex:2"></div>
+	<div style="flex:2"><strong>Item</strong></div>
+	<div style="flex:1"><strong>Price</strong></div>
+	<div style="flex:1"><strong>Quantity</strong></div>
+	<div style="flex:1"><strong>Total</strong></div>
+</div>
+
+{% for item in items %}
+{%if item.product.waitrose_match == -1%}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total}}</p></div>
+</div>
+{% else %}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.waitrose_match_id.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.waitrose_match_id.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.waitrose_match_id.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total_waitrose}}</p></div>
+</div>
+{%endif%}
+{% endfor %}
+<h4>Total price: £{{order.get_total_price_waitrose}}</h4>
+</div>
+</div>
+
+<!--                               SAINSBURYS                         -->
+<div class = "col-lg-6 card-group">
+	<div class="box-element" id = "form-wrapper">
+		<h1>Sainsburys</h1>
+<div class="cart-row">
+	<div style="flex:2"></div>
+	<div style="flex:2"><strong>Item</strong></div>
+	<div style="flex:1"><strong>Price</strong></div>
+	<div style="flex:1"><strong>Quantity</strong></div>
+	<div style="flex:1"><strong>Total</strong></div>
+</div>
+
+{% for item in items %}
+{%if item.product.sainsburys_match == -1%}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total}}</p></div>
+</div>
+{% else %}
+<div class="cart-row">
+	<div style="flex:2"><img class="row-image" src="{{item.product.sainsburys_match_id.imageURL}}"></div>
+	<div style="flex:2"><p>{{item.product.sainsburys_match_id.name}}</p></div>
+	<div style="flex:1"><p>£{{item.product.sainsburys_match_id.price|floatformat:2}}</p></div>
+	<div style="flex:1"><p class="quantity">&nbsp&nbsp;{{item.quantity}}</p></div>
+	<div style="flex:1"><p>£{{item.get_total_sainsburys}}</p></div>
+</div>
+{%endif%}
+{% endfor %}
+<h4>Total price: £{{order.get_total_price_sainsburys}}</h4>
+</div>
+</div>
+
+
+
+{% endblock content %}
